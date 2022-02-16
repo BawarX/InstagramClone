@@ -1,10 +1,11 @@
-# instagram
+# instagram Clone
 
-A new Flutter project.
+This is Instagram clone connected with firebase, 
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+This 
 
 A few resources to get you started if this is your first Flutter project:
 
