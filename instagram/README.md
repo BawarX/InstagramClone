@@ -6,6 +6,7 @@ This is Instagram clone connected with firebase,
 
 This project is a starting point for a Flutter application.
 This 
+I'm trying to use all the features that I learned from the bootcamp
 
 A few resources to get you started if this is your first Flutter project:
 
