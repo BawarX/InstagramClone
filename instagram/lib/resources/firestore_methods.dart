@@ -12,8 +12,7 @@ class FirestoreMethods{
 
   //upload post
   Future<String> uploadPost(String descripition,Uint8List file,String uid,
-    String username,String profImage)
-    async {
+    String username,String profImage) async {
       String res = 'some error occured';
     try{
       String photourl =
@@ -35,6 +34,21 @@ class FirestoreMethods{
     }catch(err){
       res = err.toString();
     
+    }
+  }
+  Future<void> likePost(String postId, String uid, List likes) async {
+    try{
+      if(likes.contains(uid)){
+      await  _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayRemove([uid]),
+        });
+      }else{
+      await  _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayUnion([uid]),
+        });
+      }
+    }catch(e){
+      print(e.toString(),);
     }
   }
 }
