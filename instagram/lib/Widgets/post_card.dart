@@ -82,7 +82,7 @@ class PostCard extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
             child: Image.network(
-              'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
+            snap['postUrl'],
               fit: BoxFit.cover,
             ),
           ),
@@ -130,7 +130,8 @@ class PostCard extends StatelessWidget {
                   DefaultTextStyle(
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w800),
                     child: Text(
-                      '1,231 likes', style: Theme.of(context).textTheme.bodyText2,
+                      '${snap['likes'].length}',
+                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   Container(
@@ -145,11 +146,11 @@ class PostCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: 'username',
+                            text: snap['username'],
                             style: const TextStyle(fontWeight: FontWeight.bold,),
                           ),
                           TextSpan(
-                            text: '  hey this is some description to be replaced',
+                            text: snap['description'],
                             style: const TextStyle(fontWeight: FontWeight.bold,),
                           ),
                         ]
@@ -164,7 +165,7 @@ class PostCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
-                'view all 200 comments',
+                snap['datePublished'],
                  style:
                  const TextStyle(
                       fontSize: 16, color: secondaryColor
@@ -176,7 +177,8 @@ class PostCard extends StatelessWidget {
           Container(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
-                '15/2/2022',
+               '2022'
+                ,
                  style:
                  const TextStyle( fontSize: 16, color: secondaryColor),
               ),
