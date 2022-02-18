@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram/Widgets/like_animation.dart';
 import 'package:instagram/model/user.dart';
 import 'package:instagram/provider/user_provider.dart';
+import 'package:instagram/resources/firestore_methods.dart';
 import 'package:instagram/utills/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +91,8 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
           GestureDetector(
-            onDoubleTap: (){
+            onDoubleTap: () async{
+           
               setState(() {
                 isLikeAnimating = true;
               });
@@ -133,11 +135,17 @@ class _PostCardState extends State<PostCard> {
                 isAnimating: widget.snap['likes'].contains(user.uid),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
+                  onPressed: () async{
+              await  FirestoreMethods().likePost(
+                widget.snap['postId'],
+                user.uid,
+                widget.snap['likes']
+              );
+                  },
+                  icon:  widget.snap['likes'].contains(user.uid) ? const Icon(
                     Icons.favorite,
                     color: Colors.red,
-                  ),
+                  ): const Icon(Icons.favorite_border,),
                 ),
               ),
                 IconButton(
