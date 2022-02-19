@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/Widgets/comment_card.dart';
 import 'package:instagram/model/user.dart';
@@ -31,7 +32,27 @@ class _CommentsScreenState extends State<CommentsScreen> {
         title: const Text('comments'),
         centerTitle: false,
       ),
-      body: CommentCard(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.
+        collection('posts').
+        doc(widget.snap['postId']).
+        collection('comments').
+        snapshots(),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: (snapshot.data! as dynamic).docs.length,
+            itemBuilder: (context, index) => CommentCard(
+              
+            ),
+          );
+        },
+      ),
       bottomNavigationBar: SafeArea(
        child: Container(
          height: kToolbarHeight,
@@ -66,7 +87,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
                  user.uid , 
                  user.username, 
                  user.photoUrl);
+                 setState(() {
+                   _commentcontroller.text = '';
+                 });
+               
                },
+
                child: Container(
                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal:  8),
                  child: const Text('Post',style: TextStyle(
