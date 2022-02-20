@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:instagram/screens/profile_screen.dart';
 import 'package:instagram/utills/colors.dart';
 import 'package:instagram/utills/global_variable.dart';
 
@@ -88,25 +89,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-
-                return StaggeredGridView.countBuilder(
-                  crossAxisCount: 3,
-                  itemCount: (snapshot.data! as dynamic).docs.length,
-                  itemBuilder: (context, index) => Image.network(
-                    (snapshot.data! as dynamic).docs[index]['postUrl'],
-                    fit: BoxFit.cover,
-                  ),
-                  staggeredTileBuilder: (index) => MediaQuery.of(context)
-                              .size
-                              .width >
-                          webScreenSize
-                      ? StaggeredTile.count(
-                          (index % 7 == 0) ? 1 : 1, (index % 7 == 0) ? 1 : 1)
-                      : StaggeredTile.count(
-                          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                );
+               return StaggeredGrid.count(crossAxisCount: 5);
+              
               },
             ),
     );

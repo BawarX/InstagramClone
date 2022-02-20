@@ -4,14 +4,17 @@ import 'package:instagram/model/post.dart';
 import 'package:instagram/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
-
-
 class FirestoreMethods{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //upload post
-  Future<String> uploadPost(String descripition,Uint8List file,String uid,
-    String username,String profImage) async {
+  Future<String> uploadPost(
+    String descripition,
+    Uint8List file,
+    String uid,
+    String username,
+    String profImage
+    ) async {
       String res = 'some error occured';
     try{
       String photourl =
@@ -28,12 +31,14 @@ class FirestoreMethods{
         profImage: profImage,
         likes: [],
       );
-      _firestore.collection('posts').doc(postId).set(post.toJson(),);
+      _firestore.collection('posts').doc(postId).set(
+        post.toJson(),
+        );
       res = 'sucees';
-    }catch(err){
+    } catch(err){
       res = err.toString();
-    
     }
+    return res;
   }
   Future<void> likePost(String postId, String uid, List likes) async {
     try{
@@ -77,5 +82,35 @@ class FirestoreMethods{
     }catch(err){
       print(err.toString());
     }
+    
   }
+Future<void> followUser(
+  String uid,
+  String followId,
+
+)async{
+  try{
+    DocumentSnapshot snap = await _firestore.collection('users').doc(uid).get();
+    List following = (snap.data()! as dynamic)['following'];
+    if(following.contains(followId)){
+      await _firestore.collection(' users').doc(followId).update({
+        'followers':FieldValue.arrayRemove([uid])
+      });
+      await _firestore.collection(' users').doc(uid).update({
+        'following':FieldValue.arrayRemove([uid])
+      });
+
+    }else{
+       await _firestore.collection(' users').doc(followId).update({
+        'followers':FieldValue.arrayUnion([uid])
+      });
+      await _firestore.collection(' users').doc(uid).update({
+        'following':FieldValue.arrayUnion([uid])
+      });
+    }
+  }catch(e){
+    print(e.toString());
+  }
+}
+
 }

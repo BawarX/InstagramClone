@@ -34,7 +34,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     });
    try{
      String res = await FirestoreMethods().uploadPost(
-      _descriptionController.text ,
+      _descriptionController.text,
       _file!,
       uid, 
       username,
@@ -78,7 +78,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           ),
             SimpleDialogOption(
             padding: const EdgeInsets.all(20),
-            child: const Text('Chhose from gallery'),
+            child: const Text('Choose from gallery'),
             onPressed: () async{
               Navigator.of(context).pop();
               Uint8List file = await pickImage(ImageSource.gallery);
