@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/Widgets/follow_button.dart';
+import 'package:instagram/resources/auth_methods.dart';
+import 'package:instagram/resources/firestore_methods.dart';
+import 'package:instagram/screens/login_Screen.dart';
 import 'package:instagram/utills/colors.dart';
 import 'package:instagram/utills/utils.dart';
 
@@ -51,10 +55,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .contains(FirebaseAuth.instance.currentUser!.uid);
       setState(() {});
     } catch (e) {
-      showSnackBar(
-        context,
-        e.toString(),
-      );
+      // showSnackBar(
+      //   context,
+      //   e.toString(),
+      // );
     }
     setState(() {
       isLoading = false;
@@ -134,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.black,
                                                 borderColor: Colors.grey,
                                                 function: () async {
-                                                  await FireStoreMethods()
+                                                  await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
@@ -153,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.white,
                                                 borderColor: Colors.blue,
                                                 function: () async {
-                                                  await FireStoreMethods()
+                                                  await FirestoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
