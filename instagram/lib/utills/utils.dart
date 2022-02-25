@@ -10,9 +10,9 @@ return await _file.readAsBytes();
  print('No image selected');
 }
 
-showSnackBar(String content, BuildContext context){
-  ScaffoldMessenger.of(context).showSnackBar(
+showSnackBar(BuildContext context, String text){
+ return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(content))
+      content: Text(text)),
   );
 }

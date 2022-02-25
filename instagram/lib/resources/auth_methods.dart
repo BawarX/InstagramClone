@@ -12,12 +12,16 @@ class AuthMethods{
     Future<model.User> getUserDetails() async {
       User currentUser = _auth.currentUser!;
 
-      DocumentSnapshot snap = await _firestore.collection('users').doc(currentUser.uid).get();
-      return model.User.fromSnap(snap);
+      DocumentSnapshot documentSnapshot = await _firestore.collection('users').doc(currentUser.uid).get();
+      return model.User.fromSnap(documentSnapshot);
     }
+
   // sign krdn user
+
   Future<String>signUpeUser(
+
     {
+
       required String email,
       required String password,
       required String username,
@@ -27,41 +31,53 @@ class AuthMethods{
   ) async{
       String res = 'some error occured!';
       try{
-        if(email.isNotEmpty || password.isNotEmpty || username.isNotEmpty || bio.isNotEmpty  ){
-          //register kdn
-     UserCredential cred =  await  _auth.createUserWithEmailAndPassword(email: email, password: password);
+        if(email.isNotEmpty || 
+        password.isNotEmpty || 
+        username.isNotEmpty || 
+        bio.isNotEmpty ||
+        file != null
+         )
+         {
+         
+     UserCredential cred =  await  _auth.createUserWithEmailAndPassword(
+       email: email,
+      password: password);
      print(cred.user!.uid);
     
-   String photoUrl = await StorageMethods()
+   String photoUrl =
+    await StorageMethods()
    .uploadImageToStorage('profilePics', file, false);
+
       // add users to our database
     model.User user = model.User(
       username: username,
-        uid: cred.user!.uid,
-        email: email,
-        bio: bio,
-        photoUrl: photoUrl,
-        // followers: [],
-        // following:[],
+          uid: cred.user!.uid,
+          photoUrl: photoUrl,
+          email: email,
+          bio: bio,
+          followers: [],
+          following: [],
     );
 
      await _firestore.collection('users').doc(cred.user!.uid).set(
-      user.toJson(),
+      {
+        'bio': bio,
+        'email': email,
+        'uid': cred.user!.uid,
+        'username': username,
+        
+       }
      );
-
      res = 'success';
         }
       }
-      // on FirebaseAuthException catch(err){
-      //   if(err.code == 'invalid-email'){// not my code
-      //     res = 'The email is badly formatted.';
-      //   }
-      // }
       catch(err){
         res = err.toString();
       } 
       return res;
   }
+
+
  // function f loggin username
  Future<String> loginUser({
    required String email,

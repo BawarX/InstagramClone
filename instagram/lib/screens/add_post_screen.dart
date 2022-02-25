@@ -1,10 +1,6 @@
-
 import 'dart:typed_data';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram/model/user.dart';
 import 'package:instagram/provider/user_provider.dart';
 import 'package:instagram/resources/firestore_methods.dart';
 import 'package:instagram/utills/colors.dart';
@@ -23,41 +19,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   bool _isloading = false;
 
-  void postImage(
-    String uid,
-    String username,
-    String profImage,
-  )
-  async{
-    setState(() {
-      _isloading = true;
-    });
-   try{
-     String res = await FirestoreMethods().uploadPost(
-      _descriptionController.text,
-      _file!,
-      uid, 
-      username,
-      profImage,
-       );
-       if(res == 'success'){
-         setState(() {
-           _isloading = false;
-         });
-         
-         showSnackBar('Posted!', context
-         );
-         clearImage();
-       }else{
-         setState(() {
-           _isloading = false;
-         });
-         showSnackBar(res, context);
-       }
-   }catch(e){
-     showSnackBar(e.toString(), context);
-   }
-  }
+  
 
   _selectImage(BuildContext context) async {
     return showDialog(context: context, builder: (context)
@@ -100,7 +62,42 @@ class _AddPostScreenState extends State<AddPostScreen> {
     }
     );
 
-    
+  }
+  void postImage(
+    String uid,
+    String username,
+    String profImage,
+  )
+  async{
+    setState(() {
+      _isloading = true;
+    });
+   try{
+     String res = await FirestoreMethods().uploadPost(
+      _descriptionController.text,
+      _file!,
+      uid, 
+      username,
+      profImage,
+       );
+       if(res == 'success'){
+         setState(() {
+           _isloading = false;
+         });
+         
+         showSnackBar(
+           context,
+           'posted!'
+         );
+         clearImage();
+       }else{
+        showSnackBar(context, res);
+       }
+   }catch(err){
+     setState(() {
+       _isloading = false;
+     });
+   }
   }
 
   void clearImage(){
@@ -121,7 +118,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
     return _file == null 
     ? Center(
       child: IconButton(
-        icon: Icon(Icons.upload),
+        icon: Icon(
+          Icons.upload
+        ),
         onPressed: () => _selectImage(context),
       ),
     )
@@ -137,16 +136,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
         actions: [
           TextButton(
             onPressed: () => postImage(
-            UserProvider().getUser.uid, 
-            UserProvider().getUser.username,
-            UserProvider().getUser.photoUrl,
+            UserProvider().getUser.uid!, 
+            UserProvider().getUser.username!,
+            UserProvider().getUser.photoUrl!,
              ),
              child: const Text(
-            'post to',
+            'post ',
             style: TextStyle(
             color: Colors.blueAccent,
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 16.0,
           ),
           )
           )
@@ -156,7 +155,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         children: [
           _isloading? const LinearProgressIndicator() : 
           const Padding(
-            padding: EdgeInsets.only(top:0),
+            padding: EdgeInsets.only(top:0.0),
             ),
             const Divider(),
           Row(
@@ -187,9 +186,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: MemoryImage(_file!),
+                       
                         fit: BoxFit.fill,
                         alignment: FractionalOffset.topCenter,
+                        image: MemoryImage(_file!),
                         ),
                     ),
                   ),

@@ -22,24 +22,39 @@ class _PostCardState extends State<PostCard> {
   int commentLen = 0;
   @override
   void initState() {
-    
-    super.initState();
-    getComments();
+  super.initState();
+  
+  fetchCommentLen();
   }
-  void getComments() async {
+  void fetchCommentLen() async {
     try{
-  QuerySnapshot snap =   await FirebaseFirestore.instance.collection('posts').doc(widget.snap['postId']).collection('comments').get();
+  QuerySnapshot snap =   await FirebaseFirestore.instance
+  .collection('posts')
+  .doc(widget.snap['postId'])
+  .collection('comments')
+  .get();
   commentLen = snap.docs.length;
-    }catch(e){
-      showSnackBar(e.toString(), context);
+    }catch(err){
+      showSnackBar(
+       context,
+       err.toString(),
+         );
     }
     setState(() {
       
     });
   }
+  deletePost(String postId) async {
+    try{
+      await FirestoreMethods().deletePost(postId);
+    }catch(err){
+      showSnackBar(context, err.toString());
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final User user  = Provider.of<UserProvider>(context).getUser;
+    final width = MediaQuery.of(context).size.width;
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(
@@ -162,7 +177,7 @@ class _PostCardState extends State<PostCard> {
                   onPressed: () async{
               await  FirestoreMethods().likePost(
                 widget.snap['postId'],
-                user.uid,
+                user.uid!,
                 widget.snap['likes']
               );
                   },

@@ -40,7 +40,7 @@ void dispose(){
    
     return  Scaffold(
       body: PageView(
-        children: homeScreenitems,
+        children: homeScreenItems,
         physics: NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
@@ -82,6 +82,7 @@ void dispose(){
             )
           ],
           onTap: navigationTaped,
+          currentIndex: _page,
         ),
     );
   }

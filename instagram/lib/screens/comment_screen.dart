@@ -64,7 +64,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
            children: [
              CircleAvatar(
                backgroundImage: NetworkImage(
-                 user.photoUrl,
+                 user.photoUrl!,
                ),
                radius: 18,
              ),
@@ -85,9 +85,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                await  FirestoreMethods().postComment(
                  widget.snap['postId'], 
                 _commentcontroller.text,
-                 user.uid , 
-                 user.username, 
-                 user.photoUrl);
+                 user.uid!, 
+                 user.username!, 
+                 user.photoUrl!
+                 );
                  setState(() {
                    _commentcontroller.text = '';
                  });

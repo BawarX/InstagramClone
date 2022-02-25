@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/Widgets/post_card.dart';
 import 'package:instagram/provider/user_provider.dart';
+import 'package:instagram/responsive/mobile_screen_layout.dart';
+import 'package:instagram/responsive/resposnive_layout_screen.dart';
 
 import 'package:instagram/screens/login_Screen.dart';
 import 'package:instagram/screens/signup_screen.dart';
 import 'package:instagram/utills/colors.dart';
-import 'package:instagram/utills/responsive/mobile_screen_layout.dart';
-import 'package:instagram/utills/responsive/resposnive_layout_screen.dart';
-import 'package:instagram/utills/responsive/web_screen_layout.dart';
+
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           }
-          return const MobileScreenLayout();
+          return const LoginScreen();
         },
       ),
     ),
