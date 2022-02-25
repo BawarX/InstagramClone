@@ -270,8 +270,8 @@ import 'package:instagram/utills/utils.dart';
 // }
 
 class ProfileScreen extends StatefulWidget {
-  final String uid;
-  const ProfileScreen({Key? key, required this.uid}) : super(key: key);
+   String uid = '3gGuyWQHWeVfUHuAO3SQEo4IqN03';
+   ProfileScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -351,13 +351,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Row(
                         children: [
-                          // CircleAvatar(
-                          //   backgroundColor: Colors.grey,
-                          //   backgroundImage: NetworkImage(
-                          //     userData['photoUrl'],
-                          //   ),
-                          //   radius: 40,
-                          // ),
+                          CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            backgroundImage: NetworkImage(
+                              userData['photoUrl'],
+                            ),
+                            radius: 40,
+                          ),
                           Expanded(
                             flex: 1,
                             child: Column(

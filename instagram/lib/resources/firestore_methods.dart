@@ -26,7 +26,7 @@ class FirestoreMethods{
         uid: uid,
         username: username,
         postId: postId,
-      //  datePublished: DateTime.now(),
+       // datePublished: DateTime.now(),
         postUrl: photourl,
         profImage: profImage,
         likes: [],
