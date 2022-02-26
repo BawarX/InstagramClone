@@ -354,7 +354,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [ // away dakamawa ladabam erro namee
                           CircleAvatar(
                             backgroundColor: Colors.grey,
-                            backgroundImage: NetworkImage( //cached network image
+                            backgroundImage: NetworkImage( //cached network image didn't worked don't know why !?
                               userData['photoUrl'],
                             ),
                             radius: 40,
