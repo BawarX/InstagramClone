@@ -271,6 +271,7 @@ import 'package:instagram/utills/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
    String uid = '3gGuyWQHWeVfUHuAO3SQEo4IqN03';
+    // uid: FirebaseAuth.instance.currentUser!.uid,
    ProfileScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
@@ -350,10 +351,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       Row(
-                        children: [
+                        children: [ // away dakamawa ladabam erro namee
                           CircleAvatar(
                             backgroundColor: Colors.grey,
-                            backgroundImage: NetworkImage(
+                            backgroundImage: NetworkImage( //cached network image
                               userData['photoUrl'],
                             ),
                             radius: 40,
@@ -402,7 +403,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.black,
                                                 borderColor: Colors.grey,
                                                 function: () async {
-                                                  await FirestoreMethods()
+                                                  await FireStoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
@@ -421,7 +422,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 textColor: Colors.white,
                                                 borderColor: Colors.blue,
                                                 function: () async {
-                                                  await FirestoreMethods()
+                                                  await FireStoreMethods()
                                                       .followUser(
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,

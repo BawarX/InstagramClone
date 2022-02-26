@@ -73,7 +73,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       _isloading = true;
     });
    try{
-     String res = await FirestoreMethods().uploadPost(
+     String res = await FireStoreMethods().uploadPost(
       _descriptionController.text,
       _file!,
       uid, 
@@ -164,7 +164,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                  'https://images.unsplash.com/photo-1644511409506-31b929a71670?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1949&q=80',
+                  // lerash errorak haya nazanm ku chak dakre
+
+                  //UserProvider.getUser.photoUrl,
+                  ''
                 ),
               ),
               SizedBox(

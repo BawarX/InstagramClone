@@ -213,6 +213,8 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
+
+
 class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -220,6 +222,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   bool _isLoading = false;
   Uint8List? _image;
+
+ AuthMethods Auth =  AuthMethods();
 
   @override
   void dispose() {
@@ -236,7 +240,7 @@ class _SignupScreenState extends State<SignupScreen> {
     });
 
     // signup user using our authmethodds
-    String res = await AuthMethods().signUpeUser(
+    String res = await Auth.signUpeUser(
         email: _emailController.text,
         password: _passwordController.text,
         username: _usernameController.text,

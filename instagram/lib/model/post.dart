@@ -18,7 +18,8 @@ class Post{
    // required this.datePublished,
     required this.postUrl,
     required this.profImage,
-    required this.likes
+    required this.likes, 
+    
   });
 
   static Post fromSnap(DocumentSnapshot snap){
@@ -28,7 +29,7 @@ class Post{
         uid: snapshot['uid'],
         descritption: snapshot['description'],
         postId: snapshot['postId'],
-     // datePublished: snapshot['datePublished'],
+     //datePublished: snapshot['datePublished'],
         profImage:snapshot['profImage'],
         likes: snapshot['likes'],
         postUrl: snapshot['postUrl'],

@@ -13,6 +13,7 @@ List<Widget> homeScreenItems = [
           AddPostScreen(),
           Text('notif'),
           ProfileScreen(
-            uid: FirebaseAuth.instance.currentUser!.uid,
+           // uid: FirebaseAuth.instance.currentUser!.uid,
+           uid: "",
             ),
 ];

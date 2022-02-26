@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:instagram/utills/colors.dart';
 import 'package:instagram/utills/global_variable.dart';
 
-
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({ Key? key }) : super(key: key);
 
   @override
   State<MobileScreenLayout> createState() => _MobileScreenLayoutState();
 }
-
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int _page = 0;
   late PageController pageController;

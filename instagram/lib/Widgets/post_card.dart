@@ -46,7 +46,7 @@ class _PostCardState extends State<PostCard> {
   }
   deletePost(String postId) async {
     try{
-      await FirestoreMethods().deletePost(postId);
+      await FireStoreMethods().deletePost(postId);
     }catch(err){
       showSnackBar(context, err.toString());
     }
@@ -109,7 +109,7 @@ class _PostCardState extends State<PostCard> {
                               .map(
                                 (e) => InkWell(
                                   onTap: ()  async {
-                                    FirestoreMethods().deletePost(widget.snap['postId']);
+                                    FireStoreMethods().deletePost(widget.snap['postId']);
                                     Navigator.of(context).pop();
                                   },
                                   child: Container(
@@ -175,7 +175,7 @@ class _PostCardState extends State<PostCard> {
                 smallLike: true,
                 child: IconButton(
                   onPressed: () async{
-              await  FirestoreMethods().likePost(
+              await  FireStoreMethods().likePost(
                 widget.snap['postId'],
                 user.uid!,
                 widget.snap['likes']
@@ -190,6 +190,7 @@ class _PostCardState extends State<PostCard> {
                 IconButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentsScreen(
                  snap: widget.snap['postId'].toString(),
+                  postId: null,
                 ),
                 ),
                 ),
