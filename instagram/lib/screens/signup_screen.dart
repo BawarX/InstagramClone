@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -49,8 +48,8 @@ import 'package:instagram/utills/utils.dart';
 //   });
 //   String res = await AuthMethods().signUpeUser(
 //     email: _emailController.text,
-//    password: _passwordController.text, 
-//    username: _usernameController.text, 
+//    password: _passwordController.text,
+//    username: _usernameController.text,
 //    bio: _bioController.text,
 //     file: _image!,
 //     );
@@ -64,7 +63,7 @@ import 'package:instagram/utills/utils.dart';
 //         MaterialPageRoute(
 //           builder: (context) => const ResponsiveLayout(
 //             mobileScreenLayout: MobileScreenLayout(),
-//             ), 
+//             ),
 //           ),
 //       );
 //     }
@@ -178,7 +177,7 @@ import 'package:instagram/utills/utils.dart';
 //                 Flexible(child: Container(), flex: 2,),
 //                 Row(
 //                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [ 
+//                   children: [
 //                    Container(
 //                      child: const Text('Dont have and account?'),
 //                      padding: const EdgeInsets.symmetric(
@@ -213,8 +212,6 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-
-
 class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -223,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _isLoading = false;
   Uint8List? _image;
 
- AuthMethods Auth =  AuthMethods();
+  AuthMethods Auth = AuthMethods();
 
   @override
   void dispose() {
@@ -245,8 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
         password: _passwordController.text,
         username: _usernameController.text,
         bio: _bioController.text,
-        file: _image!
-        );
+        file: _image);
 
     // if string returned is sucess, user has been created
     if (res == "success") {
@@ -258,7 +254,6 @@ class _SignupScreenState extends State<SignupScreen> {
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
-           
           ),
         ),
       );
