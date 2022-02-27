@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/utills/colors.dart';
@@ -38,6 +39,11 @@ void dispose(){
   Widget build(BuildContext context) {
    
     return  Scaffold(
+    appBar: AppBar(
+      actions: [
+        IconButton(icon:Icon( Icons.access_alarm) , onPressed: ()=> FirebaseAuth.instance.signOut())
+      ]
+    ), 
       body: PageView(
         children: homeScreenItems,
         physics: NeverScrollableScrollPhysics(),

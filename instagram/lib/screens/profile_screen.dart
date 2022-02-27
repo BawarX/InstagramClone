@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/resources/firestore_methods.dart';
 import 'package:instagram/screens/login_Screen.dart';
 import 'package:instagram/utills/colors.dart';
+import 'package:instagram/utills/global_variable.dart';
 import 'package:instagram/utills/utils.dart';
 
 // class ProfileScreen extends StatefulWidget {
@@ -270,8 +272,9 @@ import 'package:instagram/utills/utils.dart';
 // }
 
 class ProfileScreen extends StatefulWidget {
-   String uid = '3gGuyWQHWeVfUHuAO3SQEo4IqN03';
-    // uid: FirebaseAuth.instance.currentUser!.uid,
+   // String uid = '3gGuyWQHWeVfUHuAO3SQEo4IqN03';
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
    ProfileScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
@@ -354,8 +357,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [ // away dakamawa ladabam erro namee
                           CircleAvatar(
                             backgroundColor: Colors.grey,
-                            backgroundImage: NetworkImage( //cached network image didn't worked don't know why !?
-                              userData['photoUrl'],
+                            backgroundImage: CachedNetworkImageProvider( //cached network image didn't worked don't know why !?
+                              userData['photoUrl'] == null ? placeHolderUrl : userData['photoUrl'],
                             ),
                             radius: 40,
                           ),
